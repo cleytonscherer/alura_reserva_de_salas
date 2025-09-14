@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="reservas" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="br.com.alura.reservas.ReservasApplication" />
+    <module name="reservas" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -27,6 +27,7 @@ public class Usuario {
     public Usuario(@Valid UsuarioCadastro cadastro) {
         this.nome = cadastro.nome();
         this.email = cadastro.email();
+        this.cpf = cadastro.cpf();
         this.telefone = cadastro.telefone();
         this.senha = cadastro.senha();
     }

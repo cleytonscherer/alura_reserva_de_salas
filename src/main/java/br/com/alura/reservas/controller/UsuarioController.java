@@ -5,6 +5,7 @@ import br.com.alura.reservas.domain.usuario.UsuarioDetalhe;
 import br.com.alura.reservas.domain.usuario.Usuario;
 import br.com.alura.reservas.service.UsuarioService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UsuarioController {
     @Transactional
     public ResponseEntity<UsuarioDetalhe> cadastrar(@RequestBody @Valid UsuarioCadastro cadastro) {
         Usuario usuario = service.cadastrar(cadastro);
-        return ResponseEntity.ok(new UsuarioDetalhe(usuario));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioDetalhe(usuario));
     }
 
     @GetMapping("/{id}")
@@ -37,6 +38,6 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<UsuarioDetalhe>> listarTodos() {
         List<Usuario> lista = service.listarTodos();
-        return ResponseEntity.ok()
+        return ResponseEntity.ok(lista.stream().map(UsuarioDetalhe::new).toList());
     }
 }
