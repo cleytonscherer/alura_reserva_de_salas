@@ -1,5 +1,6 @@
 package br.com.alura.reservas.model;
 
+import br.com.alura.reservas.domain.sala.Sala;
 import br.com.alura.reservas.domain.usuario.Usuario;
 import jakarta.persistence.*;
 
@@ -14,7 +15,7 @@ public class Reserva {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="sala_id", nullable=false)
-    private Sala    sala;
+    private Sala sala;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="usuario_id", nullable=false)

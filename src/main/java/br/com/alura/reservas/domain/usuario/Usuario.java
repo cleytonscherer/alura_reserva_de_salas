@@ -17,6 +17,7 @@ public class Usuario {
     private String  email;
     private String  telefone;
     private String  senha;
+    private Boolean ativo;
 
     @OneToMany(mappedBy="usuario", fetch = FetchType.EAGER)
     private List<Reserva> reservas;
@@ -30,6 +31,7 @@ public class Usuario {
         this.cpf = cadastro.cpf();
         this.telefone = cadastro.telefone();
         this.senha = cadastro.senha();
+        this.ativo = true;
     }
 
     public Long getId() {
