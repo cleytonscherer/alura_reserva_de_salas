@@ -1,5 +1,6 @@
 package br.com.alura.reservas.controller;
 
+import br.com.alura.reservas.domain.usuario.UsuarioAtualizacao;
 import br.com.alura.reservas.domain.usuario.UsuarioCadastro;
 import br.com.alura.reservas.domain.usuario.UsuarioDetalhe;
 import br.com.alura.reservas.domain.usuario.Usuario;
@@ -39,5 +40,20 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioDetalhe>> listarTodos() {
         List<Usuario> lista = service.listarTodos();
         return ResponseEntity.ok(lista.stream().map(UsuarioDetalhe::new).toList());
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<UsuarioDetalhe> atualizar(@RequestBody @Valid UsuarioAtualizacao atualizacao) {
+        Usuario usuario = service.atualizar(atualizacao);
+        return ResponseEntity.ok(new UsuarioDetalhe(usuario));
+
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

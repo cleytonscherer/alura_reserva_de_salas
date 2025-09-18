@@ -1,5 +1,6 @@
 package br.com.alura.reservas.service;
 
+import br.com.alura.reservas.domain.usuario.UsuarioAtualizacao;
 import br.com.alura.reservas.domain.usuario.UsuarioCadastro;
 import br.com.alura.reservas.domain.usuario.Usuario;
 import br.com.alura.reservas.repository.UsuarioRepository;
@@ -26,6 +27,17 @@ public class UsuarioService {
     }
 
     public List<Usuario> listarTodos() {
-        return repository.findAll();
+        return repository.findAllByAtivoTrue();
+    }
+
+    public void excluir(Long id) {
+        Usuario usuario = repository.getReferenceById(id);
+        usuario.inativar();
+    }
+
+    public Usuario atualizar(UsuarioAtualizacao atualizacao) {
+        Usuario usuario = repository.getReferenceById(atualizacao.id());
+        usuario.atualizar(atualizacao);
+        return usuario;
     }
 }

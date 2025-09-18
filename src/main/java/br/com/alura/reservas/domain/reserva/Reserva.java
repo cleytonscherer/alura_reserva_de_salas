@@ -1,4 +1,4 @@
-package br.com.alura.reservas.model;
+package br.com.alura.reservas.domain.reserva;
 
 import br.com.alura.reservas.domain.sala.Sala;
 import br.com.alura.reservas.domain.usuario.Usuario;
@@ -13,11 +13,11 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long    id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="sala_id", nullable=false)
     private Sala sala;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="usuario_id", nullable=false)
     private Usuario usuario;
 

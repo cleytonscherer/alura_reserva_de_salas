@@ -24,7 +24,7 @@ public class SalaService {
     }
 
     public List<Sala> listarTodos() {
-        return repository.findAllAtivoTrue();
+        return repository.findAllByAtivoTrue();
     }
 
     public Sala listarPorId(Long id) {
@@ -39,6 +39,6 @@ public class SalaService {
 
     public void excluir(Long id) {
         Sala sala = repository.getReferenceById(id);
-        sala.Inativar();
+        sala.inativar();
     }
 }

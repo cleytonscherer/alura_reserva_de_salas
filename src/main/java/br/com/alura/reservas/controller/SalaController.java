@@ -43,12 +43,14 @@ public class SalaController {
     }
 
     @PutMapping
+    @Transactional
     public ResponseEntity<SalaDetalhe> atualizar(@RequestBody @Valid SalaAtualizacao atualizacao) {
         Sala sala = service.atualizar(atualizacao);
         return ResponseEntity.ok(new SalaDetalhe(sala));
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         service.excluir(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

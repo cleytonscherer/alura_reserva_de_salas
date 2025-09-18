@@ -1,6 +1,6 @@
 package br.com.alura.reservas.domain.sala;
 
-import br.com.alura.reservas.model.Reserva;
+import br.com.alura.reservas.domain.reserva.Reserva;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
@@ -53,7 +53,7 @@ public class Sala {
         }
     }
 
-    public void Inativar() {
+    public void inativar() {
         this.ativo = false;
     }
 }
