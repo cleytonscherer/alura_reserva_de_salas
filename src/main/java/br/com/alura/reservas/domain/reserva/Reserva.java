@@ -25,4 +25,14 @@ public class Reserva {
 
     private LocalDateTime   fim;
 
+    public Reserva() {
+    }
+
+    public Reserva(Sala sala, Usuario usuario, LocalDateTime inicio, LocalDateTime fim) {
+        this.sala = sala;
+        this.usuario = usuario;
+        this.inicio = inicio;
+        this.fim = fim;
+    }
+
 }
