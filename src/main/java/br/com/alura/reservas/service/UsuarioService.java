@@ -23,9 +23,10 @@ public class UsuarioService {
         return repository.save(new Usuario(cadastro));
     }
 
-    public Usuario buscarPorId(Long id) {
+    public Usuario buscarPorId(String cpf) {
 //        return repository.getReferenceById(id);
-        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+//        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+        Usuario usuario = repository.findByCpfAndAtivoTrue(cpf);
         if (usuario == null) {
             throw new EntityNotFoundException();
         }
@@ -36,9 +37,10 @@ public class UsuarioService {
         return repository.findAllByAtivoTrue();
     }
 
-    public void excluir(Long id) {
+    public void excluir(String cpf) {
 //        Usuario usuario = repository.getReferenceById(id);
-        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+//        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+        Usuario usuario = repository.findByCpfAndAtivoTrue(cpf);
         if (usuario == null) {
             throw new EntityNotFoundException();
         }
@@ -47,7 +49,8 @@ public class UsuarioService {
 
     public Usuario atualizar(UsuarioAtualizacao atualizacao) {
 //        Usuario usuario = repository.getReferenceById(atualizacao.id());
-        Usuario usuario = repository.findByIdAndAtivoTrue(atualizacao.id());
+//        Usuario usuario = repository.findByIdAndAtivoTrue(atualizacao.id());
+        Usuario usuario = repository.findByCpfAndAtivoTrue(atualizacao.cpf());
         if (usuario == null) {
             throw new EntityNotFoundException();
         }

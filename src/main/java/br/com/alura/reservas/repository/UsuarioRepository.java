@@ -7,9 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
     List<Usuario> findAllByAtivoTrue();
 
-    Usuario findByIdAndAtivoTrue(Long id);
+//    Usuario findByIdAndAtivoTrue(Long id);
+    Usuario findByCpfAndAtivoTrue(String cpf);
+
+//    Usuario findByCpf(String cpf);
 }

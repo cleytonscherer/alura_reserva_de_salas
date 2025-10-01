@@ -4,6 +4,7 @@ import br.com.alura.reservas.domain.reserva.Reserva;
 import br.com.alura.reservas.domain.reserva.StatusReserva;
 import br.com.alura.reservas.domain.sala.Sala;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -17,4 +18,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     Reserva findByIdAndStatus(Long id, StatusReserva statusReserva);
 
     Reserva findBySalaAndInicioAndStatus(Sala sala, LocalDateTime inicio, StatusReserva statusReserva);
+
+    @Query("SELECT r FROM Reserva r JOIN Sala s WHERE s.ativo = true")
+    Reserva findBetweenInicioAndFim(Sala sala, LocalDateTime dataHora);
 }

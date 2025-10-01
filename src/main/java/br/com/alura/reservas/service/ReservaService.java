@@ -34,7 +34,8 @@ public class ReservaService {
 
     public Reserva registrarReserva(ReservaCadastro cadastro) {
 //        if (!usuarioRepository.existsById(cadastro.usuarioId())) {
-        Usuario usuario = usuarioRepository.findByIdAndAtivoTrue(cadastro.usuarioId());
+//        Usuario usuario = usuarioRepository.findByIdAndAtivoTrue(cadastro.usuarioId());
+        Usuario usuario = usuarioRepository.findByCpfAndAtivoTrue(cadastro.cpf());
         if (usuario == null) {
             throw new EntityNotFoundException();
         }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("usuarios")
+@RequestMapping("api/v1/usuarios")
 public class UsuarioController {
 
     private final UsuarioService service;
@@ -31,7 +31,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDetalhe> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<UsuarioDetalhe> buscarPorId(@PathVariable String id) {
         Usuario usuario = service.buscarPorId(id);
         return ResponseEntity.ok(new UsuarioDetalhe(usuario));
     }
@@ -52,7 +52,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable String id) {
         service.excluir(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
