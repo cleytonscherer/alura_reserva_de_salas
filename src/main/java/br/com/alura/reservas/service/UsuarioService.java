@@ -4,6 +4,7 @@ import br.com.alura.reservas.domain.usuario.UsuarioAtualizacao;
 import br.com.alura.reservas.domain.usuario.UsuarioCadastro;
 import br.com.alura.reservas.domain.usuario.Usuario;
 import br.com.alura.reservas.repository.UsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,12 @@ public class UsuarioService {
     }
 
     public Usuario buscarPorId(Long id) {
-        return repository.getReferenceById(id);
+//        return repository.getReferenceById(id);
+        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+        if (usuario == null) {
+            throw new EntityNotFoundException();
+        }
+        return usuario;
     }
 
     public List<Usuario> listarTodos() {
@@ -31,13 +37,20 @@ public class UsuarioService {
     }
 
     public void excluir(Long id) {
-        Usuario usuario = repository.getReferenceById(id);
+//        Usuario usuario = repository.getReferenceById(id);
+        Usuario usuario = repository.findByIdAndAtivoTrue(id);
+        if (usuario == null) {
+            throw new EntityNotFoundException();
+        }
         usuario.inativar();
     }
 
     public Usuario atualizar(UsuarioAtualizacao atualizacao) {
-        Usuario usuario = repository.getReferenceById(atualizacao.id());
-        usuario.atualizar(atualizacao);
-        return usuario;
+//        Usuario usuario = repository.getReferenceById(atualizacao.id());
+        Usuario usuario = repository.findByIdAndAtivoTrue(atualizacao.id());
+        if (usuario == null) {
+            throw new EntityNotFoundException();
+        }
+        return usuario.atualizar(atualizacao);
     }
 }

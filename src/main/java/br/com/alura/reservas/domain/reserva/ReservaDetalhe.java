@@ -7,9 +7,18 @@ import java.time.LocalDateTime;
 
 public record ReservaDetalhe(
         Long            id,
-        Sala            sala,
-        Usuario         usuario,
+        Long            salaId,
+        Long            usuarioId,
         LocalDateTime   inicio,
         LocalDateTime   fim
 ) {
+
+    public ReservaDetalhe(Reserva reserva) {
+        this(   reserva.getId(),
+                reserva.getSala().getId(),
+                reserva.getUsuario().getId(),
+                reserva.getInicio(),
+                reserva.getFim()
+        );
+    }
 }

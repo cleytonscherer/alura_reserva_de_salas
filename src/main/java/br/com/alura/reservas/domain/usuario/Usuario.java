@@ -1,6 +1,7 @@
 package br.com.alura.reservas.domain.usuario;
 
 import br.com.alura.reservas.domain.reserva.Reserva;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
@@ -20,6 +21,7 @@ public class Usuario {
     private Boolean ativo;
 
     @OneToMany(mappedBy="usuario", fetch = FetchType.EAGER)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Reserva> reservas;
 
     public Usuario() {
@@ -66,7 +68,7 @@ public class Usuario {
         this.ativo = false;
     }
 
-    public void atualizar(UsuarioAtualizacao atualizacao) {
+    public Usuario atualizar(UsuarioAtualizacao atualizacao) {
         if (atualizacao.nome() != null) {
             this.nome = atualizacao.nome();
         }
@@ -82,5 +84,7 @@ public class Usuario {
          if (atualizacao.email() != null) {
              this.email = atualizacao.email();
          }
+
+         return this;
     }
 }

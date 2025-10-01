@@ -1,6 +1,7 @@
 package br.com.alura.reservas.domain.sala;
 
 import br.com.alura.reservas.domain.reserva.Reserva;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
@@ -19,7 +20,8 @@ public class Sala {
 
     private Boolean ativo;
 
-    @OneToMany(mappedBy="sala", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="sala", fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Reserva> reservas;
 
     public Sala() {
@@ -43,7 +45,7 @@ public class Sala {
         return capacidade;
     }
 
-    public void atualizar(@Valid SalaAtualizacao atualizacao) {
+    public Sala atualizar(@Valid SalaAtualizacao atualizacao) {
         if (atualizacao.nome() != null) {
             this.nome = atualizacao.nome();
         }
@@ -51,6 +53,7 @@ public class Sala {
         if (atualizacao.capacidade() > 0) {
             this.capacidade = atualizacao.capacidade();
         }
+        return this;
     }
 
     public void inativar() {

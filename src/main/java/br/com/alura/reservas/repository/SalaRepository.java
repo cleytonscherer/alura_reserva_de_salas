@@ -10,4 +10,6 @@ import java.util.List;
 public interface SalaRepository extends JpaRepository<Sala, Long> {
 
     List<Sala> findAllByAtivoTrue();
+
+    Sala findByIdAndAtivoTrue(Long id);
 }

@@ -47,7 +47,7 @@ public class TratadorDeErros {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> tratarErro500(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " +ex.getLocalizedMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + ex.getLocalizedMessage());
     }
 
     private record DadosErroValidacao(String campo, String mensagem) {
@@ -60,6 +60,12 @@ public class TratadorDeErros {
     public ResponseEntity<String> tratarErroRegraDeNegocio(ValidacaoException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
+
+    @ExceptionHandler(ReservaJaExistenteException.class)
+    public ResponseEntity<String> tratarErroReservaJaExistente(ReservaJaExistenteException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
 
 //    @ExceptionHandler(HttpClientErrorException.Forbidden.class)
 //    public ResponseEntity trarErro403() {
