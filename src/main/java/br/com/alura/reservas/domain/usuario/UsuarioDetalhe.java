@@ -2,8 +2,8 @@ package br.com.alura.reservas.domain.usuario;
 
 public record UsuarioDetalhe(
 //        Long    id,
-        String  nome,
         String  cpf,
+        String  nome,
         String  email,
         String  telefone
 ) {

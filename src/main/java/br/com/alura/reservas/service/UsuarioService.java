@@ -3,12 +3,15 @@ package br.com.alura.reservas.service;
 import br.com.alura.reservas.domain.usuario.UsuarioAtualizacao;
 import br.com.alura.reservas.domain.usuario.UsuarioCadastro;
 import br.com.alura.reservas.domain.usuario.Usuario;
+import br.com.alura.reservas.exception.UsuarioJaCadastradoException;
 import br.com.alura.reservas.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -20,6 +23,10 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar(@Valid UsuarioCadastro cadastro) {
+        Optional<Usuario> usuario = repository.findById(cadastro.cpf());
+        if (usuario.isPresent()) {
+            throw new UsuarioJaCadastradoException("Usuário com CPF " + cadastro.cpf() + " já está cadastrado.");
+        }
         return repository.save(new Usuario(cadastro));
     }
 

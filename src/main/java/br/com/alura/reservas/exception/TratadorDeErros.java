@@ -66,6 +66,11 @@ public class TratadorDeErros {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
+    @ExceptionHandler(UsuarioJaCadastradoException.class)
+    public ResponseEntity<String> tratarErroUsuarioJaCadastrado(UsuarioJaCadastradoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
 
 //    @ExceptionHandler(HttpClientErrorException.Forbidden.class)
 //    public ResponseEntity trarErro403() {
