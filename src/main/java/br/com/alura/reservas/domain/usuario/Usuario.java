@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Usuario {
 
     @OneToMany(mappedBy="usuario", fetch = FetchType.EAGER)
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Reserva> reservas;
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Usuario() {
     }
@@ -90,4 +91,15 @@ public class Usuario {
 
          return this;
     }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void adicionarReserva(Reserva reserva) {
+        reserva.setUsuario(this);
+        this.reservas.add(reserva);
+    }
+
+
 }

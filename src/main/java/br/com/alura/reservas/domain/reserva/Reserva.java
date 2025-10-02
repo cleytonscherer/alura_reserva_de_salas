@@ -70,4 +70,12 @@ public class Reserva {
     public void cancelar() {
         this.status = StatusReserva.CANCELADA;
     }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

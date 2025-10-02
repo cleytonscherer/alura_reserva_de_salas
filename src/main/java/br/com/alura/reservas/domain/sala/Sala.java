@@ -1,10 +1,10 @@
 package br.com.alura.reservas.domain.sala;
 
 import br.com.alura.reservas.domain.reserva.Reserva;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +22,7 @@ public class Sala {
 
     @OneToMany(mappedBy="sala", fetch = FetchType.LAZY)
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Reserva> reservas;
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Sala() {
     }
@@ -58,5 +58,18 @@ public class Sala {
 
     public void inativar() {
         this.ativo = false;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void adicionarReserva(Reserva reserva) {
+        reserva.setSala(this);
+        this.reservas.add(reserva);
     }
 }
